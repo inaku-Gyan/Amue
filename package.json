@@ -20,6 +20,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "preview:amue": "pnpm dlx serve .amue/site -l 4173 -s --no-port-switching",
     "postinstall": "nuxt prepare",
     "prepare": "simple-git-hooks",
     "lint": "oxlint .",

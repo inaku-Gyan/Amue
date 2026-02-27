@@ -36,7 +36,9 @@
 
 ```bash
 pnpm install
-pnpm dev
+
+# 预览静态构建产物（.amue/site）
+pnpm preview:amue
 ```
 
 ## CLI 用法
