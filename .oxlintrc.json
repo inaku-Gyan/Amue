@@ -5,6 +5,7 @@
     "browser": true,
     "node": true,
     "es2024": true
-  },
-  "ignorePatterns": [".nuxt", ".output", ".amue", "node_modules"]
+  }
+  // No need for "ignorePatterns":
+  // Oxlint automatically ignores files matched by `.gitignore`.
 }

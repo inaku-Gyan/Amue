@@ -16,7 +16,7 @@
 │  └─ amue.mjs
 ├─ public/
 │  └─ robots.txt
-├─ .oxfmt.json
+├─ .oxfmtrc.json
 ├─ .oxlintrc.json
 ├─ nuxt.config.ts
 ├─ package.json
