@@ -1,3 +1,6 @@
+# Amue build outputs
+.amue
+
 # Nuxt dev/build outputs
 .output
 .data
@@ -5,8 +8,6 @@
 .nitro
 .cache
 dist
-.amue
-.amue-build-*
 
 # Node dependencies
 node_modules

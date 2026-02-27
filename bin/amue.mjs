@@ -55,8 +55,9 @@ async function collectMarkdownRoutes(contentDir, currentDir = contentDir) {
   return Array.from(new Set(routes)).sort();
 }
 
-async function createTempNuxtProject(inputDir, contentDir) {
-  const tempDir = await mkdtemp(join(layerRoot, ".amue-build-"));
+async function createTempNuxtProject(inputDir, contentDir, tempRootDir) {
+  await mkdir(tempRootDir, { recursive: true });
+  const tempDir = await mkdtemp(join(tempRootDir, "nuxt-generate-"));
   const nuxtConfigPath = join(tempDir, "nuxt.config.ts");
   const prerenderRoutes = await collectMarkdownRoutes(contentDir);
 
@@ -100,6 +101,7 @@ export default defineNuxtConfig({
 
 async function copyOutput(tempDir, outDir) {
   const generatedPublicDir = join(tempDir, ".output", "public");
+  await rm(outDir, { recursive: true, force: true });
   await mkdir(outDir, { recursive: true });
   await cp(generatedPublicDir, outDir, { recursive: true, force: true });
 
@@ -111,15 +113,36 @@ async function copyOutput(tempDir, outDir) {
   }
 }
 
+async function cleanupLegacyWorkspace(workspaceDir) {
+  const legacyEntries = [
+    "200.html",
+    "404.html",
+    "index.html",
+    "favicon.ico",
+    "robots.txt",
+    "_payload.json",
+    "_nuxt",
+    "__nuxt_content",
+    "posts",
+  ];
+
+  for (const entry of legacyEntries) {
+    await rm(join(workspaceDir, entry), { recursive: true, force: true });
+  }
+}
+
 cli
   .command("build [inputDir]", "Build static blog from a content directory")
   .option("--content <dir>", "Markdown directory relative to inputDir", "content")
-  .option("--out <dir>", "Output directory", ".amue")
+  .option("--out <dir>", "Amue workspace directory", ".amue")
   .option("--base <baseURL>", "Base URL for GitHub Pages project pages", "/")
   .action(async (inputDir = ".", options) => {
+    const outWorkspace = options.out ?? ".amue";
     const resolvedInputDir = resolve(process.cwd(), inputDir);
     const contentDir = resolve(resolvedInputDir, options.content);
-    const outDir = resolve(process.cwd(), options.out);
+    const workspaceDir = resolve(process.cwd(), outWorkspace);
+    const siteOutDir = join(workspaceDir, "site");
+    const tempRootDir = join(workspaceDir, "temp");
     const baseURL = options.base.endsWith("/") ? options.base : `${options.base}/`;
 
     if (!(await exists(contentDir))) {
@@ -127,7 +150,10 @@ cli
       process.exit(1);
     }
 
-    const tempNuxtDir = await createTempNuxtProject(resolvedInputDir, contentDir);
+    await mkdir(workspaceDir, { recursive: true });
+    await cleanupLegacyWorkspace(workspaceDir);
+
+    const tempNuxtDir = await createTempNuxtProject(resolvedInputDir, contentDir, tempRootDir);
 
     try {
       await execa("npx", ["nuxi", "generate"], {
@@ -141,8 +167,9 @@ cli
         stdio: "inherit",
       });
 
-      await copyOutput(tempNuxtDir, outDir);
-      console.info(`[amue] Build complete: ${outDir}`);
+      await copyOutput(tempNuxtDir, siteOutDir);
+      console.info(`[amue] Build workspace: ${workspaceDir}`);
+      console.info(`[amue] Site output: ${siteOutDir}`);
       console.info(`[amue] Base URL: ${baseURL}`);
     } finally {
       await rm(tempNuxtDir, { recursive: true, force: true });

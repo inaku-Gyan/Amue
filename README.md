@@ -53,8 +53,18 @@ amue build /path/to/blog-content --content content --out .amue --base /repo-name
 
 - `build [inputDir]`：内容工程根目录（默认当前目录）
 - `--content`：Markdown 目录（相对 inputDir，默认 `content`）
-- `--out`：构建产物输出目录（默认 `.amue`）
+- `--out`：Amue 工作目录（默认 `.amue`）
 - `--base`：站点 `baseURL`（默认 `/`）
+
+## 构建目录结构
+
+执行 `amue build` 后，默认会生成：
+
+```txt
+.amue/
+├─ site/          # 最终静态站点产物（可直接部署）
+└─ temp/          # 构建期间临时 Nuxt 工程目录（构建后自动清理）
+```
 
 ## 内容目录约定（示例）
 

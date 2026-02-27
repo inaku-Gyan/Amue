@@ -1,5 +1,4 @@
 .nuxt
 .output
 .amue
-.amue-build-*
 node_modules
