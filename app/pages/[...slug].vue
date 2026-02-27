@@ -1,15 +1,15 @@
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 const docPath = computed(() => {
-  return route.path === '/' ? '/' : (route.path.endsWith('/') ? route.path.slice(0, -1) : route.path)
-})
+  return route.path === "/" ? "/" : route.path.endsWith("/") ? route.path.slice(0, -1) : route.path;
+});
 
 const { data: doc } = await useAsyncData(
   () => `content:${docPath.value}`,
-  () => queryCollection('content').path(docPath.value).first(),
-  { watch: [docPath] }
-)
+  () => queryCollection("content").path(docPath.value).first(),
+  { watch: [docPath] },
+);
 </script>
 
 <template>
