@@ -22,7 +22,6 @@
     "preview": "nuxt preview",
     "preview:amue": "pnpm dlx serve .amue/site -l 4173 -s --no-port-switching",
     "postinstall": "nuxt prepare",
-    "prepare": "simple-git-hooks",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt .",
@@ -41,21 +40,8 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "lint-staged": "^16.1.6",
     "oxfmt": "^0.19.0",
-    "oxlint": "^1.16.0",
-    "simple-git-hooks": "^2.13.1"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,vue}": [
-      "oxlint --fix"
-    ],
-    "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,json}": [
-      "oxfmt --write"
-    ]
+    "oxlint": "^1.16.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
