@@ -1,17 +1,64 @@
 {
   "name": "amue",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Amue - Nuxt Layer based static blog framework with CLI",
+  "bin": {
+    "amue": "./bin/amue.mjs"
+  },
+  "files": [
+    ".oxlintrc.json",
+    "app",
+    "bin",
+    "nuxt.config.ts",
+    "README.md",
+    "uno.config.ts"
+  ],
   "type": "module",
-  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prepare": "simple-git-hooks",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt .",
+    "format:write": "oxfmt --write .",
+    "check": "pnpm lint && pnpm format"
   },
   "dependencies": {
+    "@nuxt/content": "^3.7.1",
+    "@unocss/nuxt": "^66.5.2",
+    "better-sqlite3": "^12.6.2",
+    "cac": "^6.7.14",
+    "execa": "^9.6.0",
     "nuxt": "^4.3.1",
+    "unocss": "^66.5.2",
     "vue": "^3.5.28",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "lint-staged": "^16.1.6",
+    "oxfmt": "^0.19.0",
+    "oxlint": "^1.16.0",
+    "simple-git-hooks": "^2.13.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,vue}": [
+      "oxlint --fix"
+    ],
+    "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,json}": [
+      "oxfmt --write"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
   }
 }
