@@ -9,11 +9,12 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
+  css: ['~/assets/css/main.css'],
+  
   modules: [
     "@nuxt/content",
     "@nuxt/image",
     "@nuxt/ui",
-    "@unocss/nuxt",
     "@vueuse/nuxt",
     "motion-v/nuxt",
     "nuxt-og-image",
