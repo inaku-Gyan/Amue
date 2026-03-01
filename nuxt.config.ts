@@ -1,8 +1,12 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  // compatibilityDate: "2025-07-15",
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-  compatibilityDate: "2024-11-01",
+// https://nuxt.com/docs/api/configuration/nuxt-config
+const rootDir = dirname(fileURLToPath(import.meta.url));
+
+export default defineNuxtConfig({
+  compatibilityDate: "2025-07-15",
+
   devtools: { enabled: true },
 
   modules: [
@@ -14,4 +18,12 @@ export default defineNuxtConfig({
     "motion-v/nuxt",
     "nuxt-og-image",
   ],
+
+  vite: {
+    server: {
+      fs: {
+        allow: [rootDir, resolve(rootDir, "..")],
+      },
+    },
+  },
 });
