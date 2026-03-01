@@ -1,46 +1,38 @@
 {
   "name": "amue",
-  "version": "0.1.0",
-  "private": false,
-  "description": "Amue - Nuxt Layer based static blog framework with CLI",
-  "bin": {
-    "amue": "./bin/amue.mjs"
-  },
-  "files": [
-    "app",
-    "bin",
-    "nuxt.config.ts",
-    "README.md",
-    "uno.config.ts"
-  ],
-  "type": "module",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "preview:amue": "pnpm dlx serve .amue/site -l 4173 -s --no-port-switching",
     "postinstall": "nuxt prepare",
-    "lint": "oxlint .",
-    "lint:fix": "oxlint . --fix",
-    "format": "oxfmt .",
-    "format:write": "oxfmt --write .",
-    "check": "pnpm lint && pnpm format"
+    "lint:check": "oxlint .",
+    "lint": "oxlint . --fix",
+    "format:check": "oxfmt . --check",
+    "format": "oxfmt",
+    "typecheck": "nuxt typecheck",
+    "check": "pnpm lint:check && pnpm format:check && pnpm typecheck"
   },
   "dependencies": {
-    "@nuxt/content": "^3.7.1",
-    "@unocss/nuxt": "^66.5.2",
+    "@iconify-json/lucide": "^1.2.95",
+    "@iconify-json/simple-icons": "^1.2.71",
+    "@nuxt/content": "^3.12.0",
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/ui": "^4.5.0",
+    "@unocss/nuxt": "^66.6.2",
+    "@vueuse/nuxt": "^14.2.1",
     "better-sqlite3": "^12.6.2",
-    "cac": "^6.7.14",
-    "execa": "^9.6.0",
+    "motion-v": "^2.0.0",
     "nuxt": "^4.3.1",
-    "unocss": "^66.5.2",
-    "vue": "^3.5.28",
-    "vue-router": "^4.6.4"
+    "nuxt-og-image": "^5.1.13"
   },
   "devDependencies": {
+    "@unocss/preset-wind4": "^66.6.2",
     "oxfmt": "^0.35.0",
-    "oxlint": "^1.50.0"
+    "oxlint": "^1.50.0",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.2.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
