@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { queryCollectionNavigation, queryCollectionSearchSections } from "#imports";
-
 const colorMode = useColorMode();
 
 const color = computed(() => (colorMode.value === "dark" ? "#020618" : "white"));
