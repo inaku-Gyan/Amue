@@ -20,4 +20,7 @@ pnpm check
 pnpm generate
 # Preview production build
 pnpm preview
+
+# Deploy to GitHub Pages
+pnpm run deploy
 ```
