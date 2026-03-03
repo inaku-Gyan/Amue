@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "clear": "nuxt cleanup",
+    "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "dev": "nuxt dev",
     "postinstall": "nuxt prepare",
     "lint:check": "oxlint .",
     "lint": "oxlint . --fix",

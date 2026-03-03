@@ -16,8 +16,8 @@ pnpm format
 # Check for linting, formatting, and type issues
 pnpm check
 
-# Build for production
-pnpm build
+# Generate static files for production
+pnpm generate
 # Preview production build
 pnpm preview
 ```
