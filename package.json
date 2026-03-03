@@ -13,7 +13,8 @@
     "format:check": "oxfmt . --check",
     "format": "oxfmt",
     "typecheck": "nuxt typecheck",
-    "check": "pnpm lint:check && pnpm format:check && pnpm typecheck"
+    "check": "pnpm lint:check && pnpm format:check && pnpm typecheck",
+    "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.95",
@@ -29,6 +30,7 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "oxfmt": "^0.35.0",
     "oxlint": "^1.50.0",
     "typescript": "^5.9.3",
